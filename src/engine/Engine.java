@@ -15,9 +15,11 @@ import engine.Terminal;
 public class Engine {
 	public Player protag;
 
+	public Entity antag;
+
 	// public ArrayList<Room> rooms;// can be accessed by verbs
 	public Room worldMap;
-	public final String worldName = "Azaroth";// just a random name (thank Liam)
+	public final String worldName = "Azeroth";// just a random name (thank Liam)
 
 	private ArrayList<Word> vocabulary;
 	private ArrayList<String> prepositions;
@@ -27,6 +29,16 @@ public class Engine {
 	public Engine() {
 		protag = new Player(0, 0);
 		protag.setHealth(100);
+
+		antag = new Entity("The omnipotent [aidan]", "everywhere and nowhere", (Engine e2) -> {
+			Terminal.println("What have you done!??!?");
+			Object obj = Engine.Consumable("[tear] in space-time", "floating in", null, 10);
+			obj.injury = Object.type.shatters;
+			obj.holdable = null;
+			Object ref = new Object("the [air]", obj, null);
+			ref.abstractNoun();
+			obj.reference = ref;
+		}); //Not added for a reason
 
 		// rooms = new ArrayList<Room>();
 		worldMap = new Room(0, 0, "The World of " + worldName);
@@ -153,7 +165,7 @@ public class Engine {
 					: protag.health > 50 ? "You are feeling slightly injured."
 							: protag.health > 0
 									? "You think that you might have some injuries, but you've forgotten where."
-									: "You feel slightly dead, but you aren't sure.");
+									: "You are dead.");
 
 			if (protag.currentRoom != null) {
 				Room holder = protag.currentRoom;

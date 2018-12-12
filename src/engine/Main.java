@@ -20,7 +20,7 @@ public class Main {
 
 		Terminal.print(".");
 
-		game.addWord(new Verb("move go walk run climb jog travel journey venture", (Word w, Engine t) -> {
+		game.addWord(new Verb("move go walk run climb jog travel journey venture amble mosey saunter", (Word w, Engine t) -> {
 			if (w.getClass() != Direction.class) {
 				Terminal.println("Please specify a direction");
 				return;
@@ -32,8 +32,6 @@ public class Main {
 			int dy = Integer.parseInt(w.value.substring(1, 2)) - 1;
 
 			Room currentRoom = t.protag.currentRoom;
-
-			Terminal.print(".");
 
 			while (true) {//recursion without recursion
 				x = t.protag.currentRoom.coords[0];
@@ -79,7 +77,7 @@ public class Main {
 
 		Terminal.print(".");
 
-		game.addWord(new Verb("eat consume", null, (Object o, Engine t) -> {
+		game.addWord(new Verb("eat consume devour", null, (Object o, Engine t) -> {
 			if (!o.alive) {
 				t.protag.hunger -= o.consumability;
 				if (o.drinkability != null) {
@@ -108,7 +106,7 @@ public class Main {
 
 		Terminal.print(".");
 
-		game.addWord(new Verb("drink", null, (Object o, Engine t) -> {
+		game.addWord(new Verb("drink slurp sip", null, (Object o, Engine t) -> {
 			if (!o.alive) {
 				t.protag.thirst -= o.drinkability;
 				Terminal.println("You drank the " + o.accessor + ". Delicious.");
@@ -126,7 +124,7 @@ public class Main {
 
 		Terminal.print(".");
 
-		game.addWord(new Verb("inspect investigate examine scrutinize study observe", null, (Object o, Engine t) -> {
+		game.addWord(new Verb("inspect investigate examine scrutinize study observe search look", null, (Object o, Engine t) -> {
 			if (o.container.isEmpty()) {
 				Terminal.print(t.uRandOf(new String[] { "Upon inspection, you realize that " + o.inspection,
 						"It looks like " + o.inspection, "You now can see that " + o.inspection }));
@@ -151,7 +149,7 @@ public class Main {
 
 		Terminal.print(".");
 
-		game.addWord(new Verb("interact talk speak converse negotiate chat gossip", null, (Object o, Engine t) -> {
+		game.addWord(new Verb("interact talk speak converse negotiate chat gossip approach apprehend", null, (Object o, Engine t) -> {
 			if (o.alive) {
 				Entity e = (Entity) o;
 				e.interaction.accept(t.protag, t);
@@ -197,7 +195,7 @@ public class Main {
 
 		Terminal.print(".");
 
-		game.addWord(new Verb("take get steal grab seize apprehend liberate collect", null, (Object o, Engine t) -> {
+		game.addWord(new Verb("take get steal grab seize liberate collect aquire snag pick purloin snatch appropriate", null, (Object o, Engine t) -> { //apprehend is a person
 			boolean b = o.holdable;
 			if (o.alive) {
 				b = (Boolean) null;
@@ -214,7 +212,7 @@ public class Main {
 
 		Terminal.print(".");
 
-		game.addWord(new Verb("drop leave", null, (Object o, Engine t) -> {
+		game.addWord(new Verb("drop leave place", null, (Object o, Engine t) -> {
 			if (t.protag.inventory.contains(o)) {
 				t.protag.inventory.remove(o);
 				o.description = "on";
@@ -250,7 +248,7 @@ public class Main {
 
 		Terminal.print(".");
 
-		game.addWord(new Word("inventory", game.protag.inventory));
+		game.addWord(new Word("inventory stuff backpack pockets pack", game.protag.inventory));
 
 		Terminal.print(".");
 

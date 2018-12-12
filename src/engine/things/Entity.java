@@ -60,7 +60,7 @@ public class Entity extends Object {
 			Terminal.println("Not a valid response.");
 		}
 	}
-	
+
 	public Boolean check(Player p) {
 		if(anger >= restraint) {
 			attack(p);
@@ -68,7 +68,7 @@ public class Entity extends Object {
 		}
 		return true;
 	}
-	
+
 	public void attack(Player p) {
 		Terminal.println("The " + accessor + " attacks you.");
 		p.health -= strength;
