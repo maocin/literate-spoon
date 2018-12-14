@@ -33,7 +33,7 @@ public class Terminal {
 	}
 
 	public static void print(Object s) {
-		printText(s.toString());		
+		printText(s.toString());
 	}
 
 	public static String readln() {
@@ -51,20 +51,20 @@ public class Terminal {
 		newFlow.setPrefWidth(Window.root.getWidth()/2);
 		Platform.runLater(() -> Window.stack.getChildren().add(tempFlow));
 		Platform.runLater(() -> Window.stack.getChildren().add(newFlow));
-		
+
 		flow = newFlow;
 		return Window.s;
 	}
 
 	@SuppressWarnings("restriction")
 	public static void printText(String s) {
-s = s.replace("(", "∆").replace(")", "∆");
+		s = s.replace("(", "∆").replace(")", "∆");
 		boolean b = false;
 		if(s != "") {
-		if(s.charAt(0) == '∆') {
-			s = " " + s;
-			b = true;
-		}
+			if (s.substring(0,1) == "∆") {
+				s = " " + s;
+				b = true;
+			}
 		}
 		String[] strs = s.split("∆");
 		if(!b) {
@@ -72,7 +72,7 @@ s = s.replace("(", "∆").replace(")", "∆");
 			Text t = new Text(strs[0]);
 			t.setFont(new Font(15));
 			flow.getChildren().add(t);
-			
+
 			FadeTransition ft = new FadeTransition(Duration.millis(1000), t);
 			ft.setFromValue(0.0);
 			ft.setToValue(1.0);
@@ -85,14 +85,14 @@ s = s.replace("(", "∆").replace(")", "∆");
 				Thread.sleep(n);
 			} catch (InterruptedException e) {
 			}
-			
+
 			if(i + 1 != strs.length) {
 			try {
 				final int o = i;
 				Platform.runLater(() -> {
 					Text t = new Text(strs[o + 1]);
 					t.setFont(new Font(15));
-					flow.getChildren().add(t);					
+					flow.getChildren().add(t);
 					FadeTransition ft = new FadeTransition(Duration.millis(1000), t);
 					ft.setFromValue(0.0);
 					ft.setToValue(1.0);
@@ -101,7 +101,7 @@ s = s.replace("(", "∆").replace(")", "∆");
 			} catch (Exception e) {
 			}
 			}
-			
+
 		}
 	}
 }
