@@ -26,7 +26,7 @@ public class Engine {
 	private ArrayList<String> omitWords;
 	public ArrayList<Object> objectQueue = new ArrayList<Object>();
 	Random rand = new Random();
-	
+
 	public boolean changedSurroundings = true;
 
 	public Engine() {
@@ -55,8 +55,8 @@ public class Engine {
 						"in", "inside", "into", "my", "near", "on", "the", "through", "to", "toward", "towards", "under", "with", "your"}));
 		omitWords = new ArrayList<String>(
 				Arrays.asList(new String[] {"up", "down"}));
-		
-		
+
+
 	}
 
 	public void addWord(Word v) {
@@ -116,7 +116,7 @@ public class Engine {
 			protag.health += protag.health < protag.maxHealth && protag.health > 0 ? 1 : 0;
 		}
 	}
-	
+
 	public void inspectRoom() {
 		if (protag.currentRoom != null) {
 			Room holder = protag.currentRoom;
@@ -184,8 +184,8 @@ public class Engine {
 					}
 				}
 			}
-			
-			
+
+
 			if (protag.hunger > 0) {
 				if (rand.nextInt(101 - protag.hunger) < 5 && o.reference != null) {
 					compSub = lRandOf(new String[] { "possibly edible", "juicy and tender", "appetizing",
@@ -264,7 +264,7 @@ public class Engine {
 			}
 		}
 	}
-	
+
 	public void runObjects() {
 		objectQueue.clear();
 		for (Object o : protag.currentRoom.objects) {
@@ -277,7 +277,7 @@ public class Engine {
 				o.container.clear();
 			}
 		}
-		
+
 		for (Object o : protag.inventory) {
 			if (o.health != null && o.health <= 0) {
 				for (Object obj : o.container) {
@@ -288,7 +288,7 @@ public class Engine {
 				o.container.clear();
 			}
 		}
-		
+
 		Iterator<Object> objectIt = protag.currentRoom.objects.iterator();
 		while (objectIt.hasNext()) {
 			Object o = objectIt.next();
@@ -327,28 +327,20 @@ public class Engine {
 		protag.currentRoom.objects.addAll(objectQueue);
 	}
 
-<<<<<<< HEAD
-			Terminal.println(protag.health > 90 ? ""
-					: protag.health > 50 ? "You are feeling slightly injured."
-							: protag.health > 0
-									? "You think that you might have some injuries, but you've forgotten where."
-									: "You are dead.");
-=======
 	public void update() {
 		String userText;
->>>>>>> master
 
 		
-		
+
 		runObjects();
-		
-		
+
+
 		Terminal.println(protag.health > 90 ? ""
 				: protag.health > 50 ? "You are feeling slightly injured."
 						: protag.health > 0
 								? "You think that you might have some injuries, but you've forgotten where."
 								: "You feel slightly dead, but you aren't sure.");
-		
+
 		outerloop:
 		while (true) {// repeats until valid command
 			Terminal.print("(1000)");
@@ -371,15 +363,15 @@ public class Engine {
 
 			userText = Terminal.readln();
 			userText = userText.toLowerCase();
-			
+
 			for (String str : omitWords) {
 				userText = userText.replace(" " + str + " ", " ");
 			}
-			
+
 			String[] parts = userText.split("with");
-			
+
 			String[] prepUsed = new String[parts.length];
-			
+
 			for (int i = 0; i < parts.length; i++) {//probably some of the ugliest code (by me) in my life, but it works
 				prepUsed[i] = "";
 				parts[i] = parts[i].trim();
@@ -393,14 +385,14 @@ public class Engine {
 							break;
 						}
 					}
-					
+
 					if (parts[i].substring(w).indexOf(' ') == -1)
 						break;
-					
+
 					w = parts[i].substring(w).indexOf(' ') + 1;
 				}
 			}
-			
+
 			//words = new ArrayList<String>();
 
 			ArrayList<String> words = new ArrayList<String>();
@@ -409,12 +401,12 @@ public class Engine {
 				Terminal.println("What do you mean?");
 				continue;
 			}
-			
+
 			for (int i = 1; i < parts.length; i++)
 				words.addAll(Arrays.asList(parts[i].trim().split(" ")));
-			
+
 			//System.out.println(words);
-			
+
 			/*for (String str : s) {
 				if (!str.isEmpty()) {
 					words.add(str);// user text goes to array of words

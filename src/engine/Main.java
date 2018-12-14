@@ -20,12 +20,8 @@ public class Main extends Thread {
 		game = new Engine();
 
 		Terminal.print(".");
-<<<<<<< HEAD
 
 		game.addWord(new Verb("move go walk run climb jog travel journey venture amble mosey saunter", (Word w, Engine t) -> {
-=======
-		game.addWord(new Verb("move go walk run climb jog travel journey venture", (Word w, Engine t) -> {
->>>>>>> master
 			if (w.getClass() != Direction.class) {
 				Terminal.println("...What?");
 				return;
@@ -37,10 +33,6 @@ public class Main extends Thread {
 			int dy = Integer.parseInt(w.value.substring(1, 2)) - 1;
 
 			Room currentRoom = t.protag.currentRoom;
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 			while (true) {//recursion without recursion
 				x = t.protag.currentRoom.coords[0];
 				y = t.protag.currentRoom.coords[1];
@@ -97,15 +89,11 @@ public class Main extends Thread {
 
 		Terminal.print(".");
 
-<<<<<<< HEAD
 		game.addWord(new Verb("eat consume devour", null, (Object o, Engine t) -> {
-=======
-		game.addWord(new Verb("eat consume", null, (Object o, Engine t) -> {
 			if (o.abstractObj) {
 				Terminal.println("Impossible.");
 				return;
 			}
->>>>>>> master
 			if (!o.alive) {
 				t.protag.hunger -= o.consumability;
 				if (o.drinkability != null) {
@@ -151,10 +139,7 @@ public class Main extends Thread {
 
 		Terminal.print(".");
 
-<<<<<<< HEAD
-		game.addWord(new Verb("inspect investigate examine scrutinize study observe search look", null, (Object o, Engine t) -> {
-=======
-		game.addWord(new Verb("inspect investigate examine scrutinize study observe look", (Word w, Engine t) -> {
+		game.addWord(new Verb("inspect investigate examine scrutinize study observe look search", (Word w, Engine t) -> {
 			if (w.represents == t.protag.inventory) {
 				Terminal.println("Try checking your inventory instead.");
 				return;
@@ -162,7 +147,6 @@ public class Main extends Thread {
 				t.inspectRoom();
 			}
 		}, (Object o, Engine t) -> {
->>>>>>> master
 			if (o.container.isEmpty()) {
 				Terminal.print(t.uRandOf(new String[] { "Upon inspection, you realize that " + o.inspection,
 						"It looks like " + o.inspection, "You now can see that " + o.inspection }));
@@ -269,29 +253,8 @@ public class Main extends Thread {
 
 		Terminal.print(".");
 
-<<<<<<< HEAD
-		game.addWord(new Verb("take get steal grab seize liberate collect aquire snag pick purloin snatch appropriate", null, (Object o, Engine t) -> { //apprehend is a person
-			boolean b = o.holdable;
-			if (o.alive) {
-				b = (Boolean) null;
-			}
-			if (!t.protag.inventory.contains(o)) {
-				t.protag.inventory.add(o);
-				t.protag.currentRoom.objects.remove(o);
-				removal(o, t);
-				Terminal.println("You took the " + o.accessor + ".");
-			} else {
-				b = (Boolean) null;
-			}
-		}));
-
-		Terminal.print(".");
-
-		game.addWord(new Verb("drop leave place", null, (Object o, Engine t) -> {
-			if (t.protag.inventory.contains(o)) {
-=======
 		game.addWord(
-				new Verb("take get steal grab seize apprehend liberate collect pick", null, (Object o, Engine t) -> {
+				new Verb("take get steal grab seize apprehend liberate collect aquire snag pick purloin snatch appropriate", null, (Object o, Engine t) -> {
 					boolean b = o.holdable;
 					if (o.alive) {
 						b = (Boolean) null;
@@ -321,12 +284,11 @@ public class Main extends Thread {
 				Terminal.println("You dropped the " + o.accessor + ".");
 			}
 			else if (t.protag.inventory.contains(o)) {
->>>>>>> master
 				t.protag.inventory.remove(o);
 				o.description = "on";
 				o.reference = t.protag.currentRoom.floor;
 
-				
+
 				t.protag.currentRoom.objects.add(o);
 				Terminal.println("You dropped the " + o.accessor + ".");
 			} else {
